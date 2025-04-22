@@ -25,4 +25,5 @@ public class Theater {
 
     @ManyToOne
     private AppUser owner;
+    String status;
 }
