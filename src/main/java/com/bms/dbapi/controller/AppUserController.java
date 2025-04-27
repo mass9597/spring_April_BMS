@@ -3,12 +3,14 @@ package com.bms.dbapi.controller;
 
 import com.bms.dbapi.models.AppUser;
 import com.bms.dbapi.repository.AppUserRepository;
+import com.bms.dbapi.responsebody.AdminResponseBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -45,5 +47,16 @@ public class AppUserController {
 
         return new ResponseEntity<>(null,HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping("/admins")
+        public ResponseEntity<?> getAllAdmins(){
+            List<AppUser> admins= appUserRepository.getAllAdmins();
+            AdminResponseBody response = new AdminResponseBody();
+
+            response.setAdmins(admins);
+
+            return new ResponseEntity<>(response,HttpStatus.OK);
+        }
+
 
 }
