@@ -29,4 +29,6 @@ public class Show {
     @ManyToOne
     Movie movie;
 
+    Double price;
+
 }

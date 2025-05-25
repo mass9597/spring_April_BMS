@@ -22,10 +22,10 @@ public class Movie {
     private UUID id;
     private String name;
     private Double duration;
-    private boolean isReleased;
+    private boolean released;
     private int review;
     private int totalReviewVotes;
-    private String Language;
+    private String language;
 
     @ManyToOne
     private AppUser movieOwner;

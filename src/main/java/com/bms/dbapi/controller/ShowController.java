@@ -4,11 +4,13 @@ package com.bms.dbapi.controller;
 import com.bms.dbapi.models.AppUser;
 import com.bms.dbapi.models.Show;
 import com.bms.dbapi.repository.ShowRepository;
+import com.bms.dbapi.responsebody.ShowsByHallIdRB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -44,5 +46,17 @@ public class ShowController {
         showRepository.deleteById(showId);
 
         return new ResponseEntity<>(null,HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/hall/{hallId}")
+
+    public ResponseEntity<?> getShowsByHallId(@PathVariable UUID hallId){
+        List<Show> shows =  showRepository.getShowByHallId(hallId);
+
+        ShowsByHallIdRB showList = new ShowsByHallIdRB();
+
+        showList.setShows(shows);
+
+        return new ResponseEntity<>(showList,HttpStatus.OK);
     }
 }

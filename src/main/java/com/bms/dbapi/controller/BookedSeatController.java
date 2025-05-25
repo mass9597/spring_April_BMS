@@ -45,4 +45,12 @@ public class BookedSeatController {
 
         return new ResponseEntity<>(null,HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping("/check")
+    public ResponseEntity<?> isTheSeatBooked(@RequestParam UUID showId,
+                                             @RequestParam int seat){
+       BookedSeat bookedSeat = bookedSeatRepository.isSeatBooked(showId,seat);
+
+       return new ResponseEntity<>(bookedSeat,HttpStatus.OK);
+    }
 }
